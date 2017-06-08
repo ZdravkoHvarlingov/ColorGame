@@ -1,0 +1,51 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfApplication1"
+        Title="MainWindow" Height="350" Width="525" KeyDown="OnWindowKeyDown"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:BackgroundToArrowConverter x:Key="imageConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Height="25" IsMainMenu="True">
+            <MenuItem Height="25" Header="Ниво">
+                <MenuItem Height="25" Name="MenuItemFirstLevel" Header="Първо ниво" IsCheckable="True" Checked="OnMenuItemFirstChecked">
+                    <MenuItem.Icon>
+                        <Image Source="Images/1.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Height="25" Name="MenuItemSecondLevel" Header="Второ ниво" IsCheckable="True" Checked="OnMenuItemSecondChecked">
+                    <MenuItem.Icon>
+                        <Image Source="Images/2.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Height="25" Header="_Опции">     
+                <MenuItem Height="25" Header="Изход" Click="OnMenuItemExitClick">
+                    <MenuItem.Icon>
+                        <Image Source="Images/exit.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left" Name="TextBlockTimer" Width="140"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontFamily="Segoe Print" FontStyle="Italic" FontSize="16">Here is the color game!</TextBlock>
+            <TextBlock HorizontalAlignment="Right" FontSize="14" Width="100" Margin="15,0,0,0" Name="TextBlockTurns"></TextBlock>
+        </StackPanel>
+        <Border Name="borderGame"  BorderThickness="10" Grid.Row="2">
+            <Grid Grid.Row="2" Name="GridColorGame">
+                <Image Name="ImageArrow" Source="{Binding ElementName=GridColorGame, Path=Background, Converter={StaticResource imageConverter}}"></Image>
+            </Grid>
+        </Border>        
+    </Grid>
+</Window>
